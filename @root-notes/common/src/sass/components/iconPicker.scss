@@ -52,15 +52,13 @@
 
         .controls {
             display: flex;
-            vertical-align: bottom;
             .page-selector {
-                flex-grow: 1;
                 margin-top: auto;
                 margin-bottom: 0px;
             }
 
             .page-size-selector {
-                flex-grow: 1;
+                min-width: 0px;
             }
         }
     }

@@ -17,13 +17,55 @@ import {
   IconRepresentation,
   iconTypes,
 } from "./types";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { GenericIcon } from "./GenericIcon";
 import { startCase } from "lodash";
 import { useTranslation } from "react-i18next";
 import { MdSearch } from "react-icons/md";
 
 type TabData = { family: IconFamilies; iconNames: string[] };
+
+const IconItem = memo(
+  ({
+    value,
+    setValue,
+    icon,
+    family,
+  }: {
+    value: IconRepresentation;
+    setValue: (value: IconRepresentation) => void;
+    icon: { name: string; friendly: string };
+    family: IconFamilies;
+  }) => {
+    return (
+      <Tooltip
+        label={icon.friendly}
+        key={icon.name}
+        position="bottom"
+        withArrow
+      >
+        <Paper
+          shadow="sm"
+          p="sm"
+          className={
+            "icon-item" +
+            (value.family === family && value.name === icon.name
+              ? " selected"
+              : "")
+          }
+          onClick={() => setValue({ family, name: icon.name })}
+        >
+          <Stack justify="center" align="center" gap="xs">
+            <GenericIcon family={family} name={icon.name} size={32} />
+            <Text ta="center" size="xs" className="icon-name">
+              {icon.friendly}
+            </Text>
+          </Stack>
+        </Paper>
+      </Tooltip>
+    );
+  }
+);
 
 function IconPickerTab({
   value,
@@ -89,40 +131,21 @@ function IconPickerTab({
         />
         <SimpleGrid cols={5} spacing="sm" className="icon-list">
           {displayedIcons.map((icon) => (
-            <Tooltip
-              label={icon.friendly}
+            <IconItem
+              value={value}
+              setValue={setValue}
+              icon={icon}
+              family={family}
               key={icon.name}
-              position="bottom"
-              withArrow
-            >
-              <Paper
-                shadow="sm"
-                p="sm"
-                className={
-                  "icon-item" +
-                  (value.family === family && value.name === icon.name
-                    ? " selected"
-                    : "")
-                }
-                onClick={() => setValue({ family, name: icon.name })}
-              >
-                <Stack justify="center" align="center" gap="xs">
-                  <GenericIcon family={family} name={icon.name} size={32} />
-                  <Text ta="center" size="xs" className="icon-name">
-                    {icon.friendly}
-                  </Text>
-                </Stack>
-              </Paper>
-            </Tooltip>
+            />
           ))}
         </SimpleGrid>
-        <Group gap="sm" className="controls">
+        <Group gap="sm" className="controls" justify="space-between">
           <Pagination
             className="page-selector"
             value={page + 1}
             onChange={(p) => setPage(p - 1)}
             total={pages}
-            siblings={2}
           />
           <Select
             data={["10", "25", "50", "100"]}
@@ -136,6 +159,7 @@ function IconPickerTab({
     </Tabs.Panel>
   );
 }
+
 
 function IconPickerModal({
   open,
