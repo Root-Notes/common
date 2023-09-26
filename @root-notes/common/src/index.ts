@@ -8,5 +8,7 @@ import {
 } from "./components/icons/types";
 import "./sass/index.scss";
 
+export type * from "./types/project";
+
 export { GenericIcon, IconPicker, IconFamilyNames, iconTypes };
 export type { IconFamilies, IconRepresentation };
