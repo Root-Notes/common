@@ -21,7 +21,7 @@ export default defineConfig({
           declarationMap: true,
         },
       },
-      exclude: ["vite.config.ts"],
+      exclude: ["vite.config.tsx"],
     }),
   ],
   build: {
@@ -37,14 +37,10 @@ export default defineConfig({
       // into your library
       input: {
         // @ts-ignore
-        main: path.resolve(__dirname, "src/components/main.ts"),
+        main: path.resolve(__dirname, "src/index.tsx"),
       },
       external: ["React"],
       output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "main.css") return "my-library-react-ts.css";
-          return assetInfo.name;
-        },
         exports: "named",
         globals: {
           react: "React",
