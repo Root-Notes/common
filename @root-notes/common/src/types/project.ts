@@ -2,7 +2,7 @@ import { IconRepresentation } from "..";
 
 export type ProjectManifest = {
     name: string;
-    folder: string;
+    folder: string[];
     icon: IconRepresentation;
 };
 
