@@ -6,19 +6,14 @@ export type ProjectManifest = {
     icon: IconRepresentation;
 };
 
-export type Record = (
-    | {
-          type: "manifest";
-          data: ProjectManifest;
-      }
-    | {
-          type: "note";
-      }
-) & {
+export type Record = {
+    type: "note";
+} & {
     lastRevision: number;
     id: string;
 };
 
 export type Project = {
     records: Record[];
+    manifest: ProjectManifest;
 };
