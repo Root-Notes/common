@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
+import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
     plugins: [
@@ -26,6 +27,13 @@ export default defineConfig({
         //   exclude: ["vite.config.tsx"],
         // }),
     ],
+    resolve: {
+        alias: {
+            "@root-notes/root-doc": fileURLToPath(
+                new URL("../../../root-doc/root-doc/src", import.meta.url)
+            ),
+        },
+    },
     build: {
         cssCodeSplit: true,
         lib: {

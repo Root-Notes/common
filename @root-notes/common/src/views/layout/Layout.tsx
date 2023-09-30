@@ -1,5 +1,5 @@
 import { AppShell, AppShellHeader, AppShellMain, Group } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { RootDoc } from "@root-notes/root-doc";
 //@ts-ignore
 import AppLogo from "../../assets/icon.svg?react";
 import { MenuDropdown } from "../../components/menu/MenuDropdown";
@@ -79,7 +79,7 @@ export function Layout() {
                 </Group>
             </AppShellHeader>
             <AppShellMain className="shell-content">
-                <Outlet />
+                <RootDoc kit={{}} data={{}} document={[]} />
             </AppShellMain>
         </AppShell>
     );
