@@ -1,5 +1,6 @@
 import { AppShell, AppShellHeader, AppShellMain, Group } from "@mantine/core";
 import { RootDoc } from "@root-notes/root-doc";
+import { RootRenderKit } from "../../renderkit/kit";
 //@ts-ignore
 import AppLogo from "../../assets/icon.svg?react";
 import { MenuDropdown } from "../../components/menu/MenuDropdown";
@@ -79,7 +80,23 @@ export function Layout() {
                 </Group>
             </AppShellHeader>
             <AppShellMain className="shell-content">
-                <RootDoc kit={{}} data={{}} document={[]} />
+                <RootDoc
+                    kit={RootRenderKit}
+                    data={{}}
+                    document={[
+                        {
+                            supertype: "element",
+                            type: "box",
+                            children: [
+                                {
+                                    supertype: "element",
+                                    type: "box",
+                                    children: [],
+                                },
+                            ],
+                        },
+                    ]}
+                />
             </AppShellMain>
         </AppShell>
     );

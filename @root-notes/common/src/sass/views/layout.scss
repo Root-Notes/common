@@ -8,9 +8,21 @@
     overflow: hidden;
 
     .shell-toolbar {
+        box-sizing: border-box;
         .app-icon {
             width: 34px;
             height: 34px;
         }
+    }
+
+    .shell-content {
+        position: absolute;
+        top: 48px;
+        left: 0px;
+        display: inline-block;
+        width: 100%;
+        min-height: 0px;
+        height: calc(100% - 48px);
+        box-sizing: border-box;
     }
 }
