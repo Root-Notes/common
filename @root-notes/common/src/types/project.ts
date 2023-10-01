@@ -1,4 +1,5 @@
 import { IconRepresentation } from "..";
+import { NoteRecord } from "./notes";
 
 export type ProjectManifest = {
     id: string;
@@ -6,29 +7,24 @@ export type ProjectManifest = {
     icon: IconRepresentation;
 };
 
-export type Record = {
-    type: "note";
-} & {
-    lastRevision: number;
-    id: string;
-};
+export type Records = NoteRecord;
 
 export type Project = {
-    records: Record[];
+    records: Records[];
     manifest: ProjectManifest;
 };
 
 export interface ProjectInterface {
     manifest: ProjectManifest;
-    records: { [key: string]: Record };
+    records: { [key: string]: Records };
     sync: () => Promise<void>;
     close: () => Promise<void>;
     createRecord?: (
-        record: Omit<Record, "id" | "lastRevision">
-    ) => Promise<Record>;
+        record: Omit<Records, "id" | "lastRevision">
+    ) => Promise<Records>;
     updateRecord?: (
-        record: Omit<Record, "id" | "lastRevision">
-    ) => Promise<Record>;
+        record: Omit<Records, "id" | "lastRevision">
+    ) => Promise<Records>;
     deleteRecord?: (recordId: string) => Promise<void>;
     updateManifest?: (newManifest: ProjectManifest) => Promise<ProjectManifest>;
 }
