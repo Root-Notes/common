@@ -6,6 +6,11 @@ import { RenderGrid } from "./components/structural/grid";
 import { RenderPaper } from "./components/structural/paper";
 import { RenderAccordion } from "./components/structural/accordion";
 import { RenderScrollArea } from "./components/structural/scrollArea";
+import { RenderHeader } from "./components/decoration/header";
+import { RenderDivider } from "./components/decoration/divider";
+import { RenderAlert } from "./components/decoration/alert";
+import { RenderTextBlock } from "./components/decoration/textBlock";
+import { RenderLabelledGroup } from "./components/decoration/labelledGroup";
 
 export const RootRenderKit: RenderKit = {
     box: RenderBox,
@@ -15,4 +20,9 @@ export const RootRenderKit: RenderKit = {
     paper: RenderPaper,
     accordion: RenderAccordion,
     scrollArea: RenderScrollArea,
+    header: RenderHeader,
+    divider: RenderDivider,
+    alert: RenderAlert,
+    text: RenderTextBlock,
+    labelledGroup: RenderLabelledGroup,
 };
