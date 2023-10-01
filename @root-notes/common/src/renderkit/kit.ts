@@ -11,6 +11,9 @@ import { RenderDivider } from "./components/decoration/divider";
 import { RenderAlert } from "./components/decoration/alert";
 import { RenderTextBlock } from "./components/decoration/textBlock";
 import { RenderLabelledGroup } from "./components/decoration/labelledGroup";
+import { RenderBooleanField } from "./components/fields/booleanField";
+import { RenderTextField } from "./components/fields/textField";
+import { RenderNumberField } from "./components/fields/numberField";
 
 export const RootRenderKit: RenderKit = {
     box: RenderBox,
@@ -25,4 +28,7 @@ export const RootRenderKit: RenderKit = {
     alert: RenderAlert,
     text: RenderTextBlock,
     labelledGroup: RenderLabelledGroup,
+    booleanField: RenderBooleanField,
+    textField: RenderTextField,
+    numberField: RenderNumberField,
 };

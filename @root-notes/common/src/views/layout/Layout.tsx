@@ -1,6 +1,4 @@
 import { AppShell, AppShellHeader, AppShellMain, Group } from "@mantine/core";
-import { RootDoc } from "@root-notes/root-doc";
-import { RootRenderKit } from "../../renderkit/kit";
 //@ts-ignore
 import AppLogo from "../../assets/icon.svg?react";
 import { MenuDropdown } from "../../components/menu/MenuDropdown";
@@ -13,6 +11,7 @@ import {
     MdSettings,
 } from "react-icons/md";
 import { useRootProject } from "../..";
+import { Outlet } from "react-router-dom";
 
 export function Layout() {
     const { t } = useTranslation();
@@ -80,23 +79,7 @@ export function Layout() {
                 </Group>
             </AppShellHeader>
             <AppShellMain className="shell-content">
-                <RootDoc
-                    kit={RootRenderKit}
-                    data={{}}
-                    document={[
-                        {
-                            supertype: "element",
-                            type: "box",
-                            children: [
-                                {
-                                    supertype: "element",
-                                    type: "box",
-                                    children: [],
-                                },
-                            ],
-                        },
-                    ]}
-                />
+                <Outlet />
             </AppShellMain>
         </AppShell>
     );

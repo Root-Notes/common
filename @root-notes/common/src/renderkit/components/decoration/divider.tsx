@@ -1,6 +1,6 @@
 import { ElementProps, Divider as ElementType } from "@root-notes/root-doc";
 import { Divider } from "@mantine/core";
-import { GenericIcon } from "src";
+import { GenericIcon } from "../../../";
 
 export function RenderDivider(props: ElementProps<ElementType>) {
     return (

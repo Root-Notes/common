@@ -1,6 +1,6 @@
 import { ElementProps, Header as ElementType } from "@root-notes/root-doc";
 import { Group, Title } from "@mantine/core";
-import { GenericIcon } from "src";
+import { GenericIcon } from "../../../";
 
 export function RenderHeader(props: ElementProps<ElementType>) {
     return (
