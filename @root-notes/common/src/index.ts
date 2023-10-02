@@ -9,11 +9,11 @@ import {
 import "./sass/index.scss";
 import { EventProvider } from "./components/events/EventProvider";
 import { useTrigger, useListener } from "./components/events/util";
-import { RootNotesInterface } from "./components/interface/RootNotesInterface";
+import { RootNotesInterface } from "./components/interface_old/RootNotesInterface";
 import {
     useRootProject,
     RootNotesContextType,
-} from "./components/interface/util";
+} from "./components/interface_old/util";
 
 export type * from "./types/project";
 

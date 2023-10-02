@@ -9,8 +9,4 @@ export abstract class NoteRecord<TContent = any> extends Record {
     public abstract parent: null | string;
     public abstract tags: string[];
     public abstract content: TContent;
-    public abstract serialize: () => Partial<NoteRecord<TContent>>;
-    public static deserialize: <T>(
-        data: Partial<NoteRecord<T>>
-    ) => NoteRecord<T>;
 }

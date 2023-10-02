@@ -1,35 +1,13 @@
-import { IconRepresentation } from "..";
 import { NoteRecord } from "./notes";
+import { ManifestRecord } from "./record";
+import { PartialDeep } from "type-fest";
+import { SyncRecord } from "./sync";
 
-export type ProjectManifest = {
-    id: string;
-    name: string;
-    icon: IconRepresentation;
-};
-
-export type Records = NoteRecord;
-
-export type Project = {
-    records: Records[];
-    manifest: ProjectManifest;
-};
+export type Records = NoteRecord | ManifestRecord | SyncRecord;
 
 export interface ProjectInterface {
-    manifest: ProjectManifest;
-    records: { [key: string]: Records };
-    sync: () => Promise<void>;
-    close: () => Promise<void>;
-    createRecord?: (
-        record: Omit<Records, "id" | "lastRevision">
-    ) => Promise<Records>;
-    updateRecord?: (
-        record: Omit<Records, "id" | "lastRevision">
-    ) => Promise<Records>;
-    deleteRecord?: (recordId: string) => Promise<void>;
-    updateManifest?: (newManifest: ProjectManifest) => Promise<ProjectManifest>;
+    records: Records[];
+    set: (id: string, data: PartialDeep<Records>) => void;
+    create: (data: Records) => void;
+    delete: (id: string) => void;
 }
-
-export type ActiveProjectContextType = {
-    active: true;
-    interface: ProjectInterface;
-};

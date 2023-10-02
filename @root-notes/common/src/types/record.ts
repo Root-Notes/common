@@ -1,9 +1,10 @@
 import { IconRepresentation } from "..";
-import { omit, set } from "lodash";
+import { set } from "lodash";
+import { SyncInfo } from "./sync";
 
 export interface AtomicEdit<TData = any, TSource = any> {
     id: string;
-    family: string;
+    family: string | "_replace";
     target: string;
     data: TData;
     source: TSource;
@@ -15,8 +16,6 @@ export abstract class Record {
     public abstract id: string;
     public abstract lastRevision: AtomicEdit | null;
     public abstract applyEdit: (edit: AtomicEdit) => any;
-    public abstract serialize: () => any;
-    public static deserialize: (data: any) => Record;
 }
 
 export type ManifestSettings = {
@@ -25,6 +24,7 @@ export type ManifestSettings = {
         name: string;
         icon: IconRepresentation;
     };
+    sync: SyncInfo[];
 };
 
 export class ManifestRecord implements Record {
@@ -42,19 +42,5 @@ export class ManifestRecord implements Record {
         set(this.settings, edit.data.setting, edit.data.value);
         this.lastRevision = edit;
         return this;
-    }
-
-    public serialize(): Partial<ManifestRecord> {
-        return omit(this, ["applyEdit", "serialize", "deserialize"]);
-    }
-
-    public static deserialize(data: Partial<ManifestRecord>): ManifestRecord {
-        return new ManifestRecord(
-            data.lastRevision ?? null,
-            data.settings ?? {
-                id: "",
-                meta: { name: "", icon: { family: "md", name: "MdBook" } },
-            }
-        );
     }
 }

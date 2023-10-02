@@ -1,4 +1,4 @@
-import { ProjectInterface } from "../../";
+import { ProjectInterface } from "../..";
 import { createContext, useContext } from "react";
 
 export type RootNotesContextType = {
