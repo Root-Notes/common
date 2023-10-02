@@ -2,13 +2,22 @@ import { IconRepresentation } from "..";
 import { set } from "lodash";
 import { SyncInfo } from "./sync";
 
-export interface AtomicEdit<TData = any, TSource = any> {
-    id: string;
-    family: string | "_replace";
-    target: string;
-    data: TData;
-    source: TSource;
-}
+export type AtomicEdit<TData = any, TSource = any> =
+    | {
+          id: string;
+          family: "specific";
+          target: string;
+          data: TData;
+          source: TSource;
+      }
+    | ((
+          | {
+                command: "delete";
+                target: string;
+            }
+          | { command: "create"; data: TData }
+          | { command: "replace"; target: string; data: TData }
+      ) & { id: string; family: "builtin"; source: TSource });
 
 export abstract class Record {
     public abstract family: string;
@@ -39,8 +48,12 @@ export class ManifestRecord implements Record {
     public applyEdit(
         edit: AtomicEdit<{ setting: string; value: any }>
     ): ManifestRecord {
-        set(this.settings, edit.data.setting, edit.data.value);
-        this.lastRevision = edit;
-        return this;
+        if (edit.family === "builtin") {
+            return this;
+        } else {
+            set(this.settings, edit.data.setting, edit.data.value);
+            this.lastRevision = edit;
+            return this;
+        }
     }
 }
