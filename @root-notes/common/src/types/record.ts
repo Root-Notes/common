@@ -9,14 +9,14 @@ export interface AtomicEdit<TData = any, TSource = any> {
     source: TSource;
 }
 
-export interface Record {
-    family: string;
-    type: string;
-    id: string;
-    lastRevision: AtomicEdit | null;
-    applyEdit: (edit: AtomicEdit) => any;
-    serialize: () => any;
-    deserialize: (data: any) => Record;
+export abstract class Record {
+    public abstract family: string;
+    public abstract type: string;
+    public abstract id: string;
+    public abstract lastRevision: AtomicEdit | null;
+    public abstract applyEdit: (edit: AtomicEdit) => any;
+    public abstract serialize: () => any;
+    public static deserialize: (data: any) => Record;
 }
 
 export type ManifestSettings = {
@@ -48,7 +48,7 @@ export class ManifestRecord implements Record {
         return omit(this, ["applyEdit", "serialize", "deserialize"]);
     }
 
-    public deserialize(data: Partial<ManifestRecord>): ManifestRecord {
+    public static deserialize(data: Partial<ManifestRecord>): ManifestRecord {
         return new ManifestRecord(
             data.lastRevision ?? null,
             data.settings ?? {

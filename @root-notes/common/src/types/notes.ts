@@ -1,12 +1,16 @@
 import { IconRepresentation } from "..";
 import { AtomicEdit, Record } from "./record";
 
-export interface NoteRecord<TContent = any> extends Record {
-    family: "note";
-    applyEdit: (edit: AtomicEdit) => Promise<NoteRecord>;
-    name: string;
-    icon: IconRepresentation;
-    parent: null | string;
-    tags: string[];
-    content: TContent;
+export abstract class NoteRecord<TContent = any> extends Record {
+    public family = "note";
+    public abstract applyEdit: (edit: AtomicEdit) => Promise<NoteRecord>;
+    public abstract name: string;
+    public abstract icon: IconRepresentation;
+    public abstract parent: null | string;
+    public abstract tags: string[];
+    public abstract content: TContent;
+    public abstract serialize: () => Partial<NoteRecord<TContent>>;
+    public static deserialize: <T>(
+        data: Partial<NoteRecord<T>>
+    ) => NoteRecord<T>;
 }
