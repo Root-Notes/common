@@ -10,12 +10,14 @@ export function SyncContextProvider({
 }: {
     children?: ReactNode | ReactNode[];
     records: Records[];
-    prototypes: { [key in SyncTypes]: (data: SyncInfo) => SyncProvider };
+    prototypes: Partial<{
+        [key in SyncTypes]: (data: SyncInfo) => SyncProvider;
+    }>;
 }) {
     const syncs = useMemo(
         () =>
             (records.filter((r) => r.family === "sync") as SyncRecord[]).map(
-                (v) => prototypes[v.type](v.info)
+                (v) => (prototypes[v.type] as any)(v.info)
             ),
         [records]
     );

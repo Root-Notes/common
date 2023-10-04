@@ -11,6 +11,7 @@ import { EventProvider } from "./components/events/EventProvider";
 import { useTrigger, useListener } from "./components/events/util";
 import { ManifestRecord } from "./types/record";
 import { SyncRecord } from "./types/sync";
+import { RootProvider } from "./components/root/RootProvider";
 
 export type * from "./types/project";
 export type * from "./types/notes";
@@ -23,3 +24,5 @@ export { SyncRecord };
 export { GenericIcon, IconPicker, IconFamilyNames, iconTypes };
 export type { IconFamilies, IconRepresentation };
 export { EventProvider, useListener, useTrigger };
+export { RootProvider };
+export type { ProjectDescriptor } from "./components/root/util";

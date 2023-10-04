@@ -11,9 +11,12 @@ import {
     MdSettings,
 } from "react-icons/md";
 import { Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { RootContext } from "../../components/root/util";
 
 export function Layout() {
     const { t } = useTranslation();
+    const { close } = useContext(RootContext);
     return (
         <AppShell className="common-shell">
             <AppShellHeader className="shell-toolbar" h={48} p={6}>
@@ -49,7 +52,7 @@ export function Layout() {
                                         "common.components.menus.file.close"
                                     ),
                                     icon: <MdClose size={20} />,
-                                    onActivate: () => {},
+                                    onActivate: () => close(),
                                 },
                             ]}
                         />

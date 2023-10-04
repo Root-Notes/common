@@ -11,9 +11,9 @@ export function RootProvider({
     syncFactories,
 }: {
     descriptor: ProjectDescriptor | null;
-    syncFactories: {
+    syncFactories: Partial<{
         [key in Partial<SyncTypes>]: (data: SyncInfo) => SyncProvider;
-    };
+    }>;
 }) {
     const records: null | Records[] = useMemo(
         () => (descriptor ? descriptor.entrypoint() : null),
