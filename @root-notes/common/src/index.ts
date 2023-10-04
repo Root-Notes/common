@@ -9,16 +9,20 @@ import {
 import "./sass/index.scss";
 import { EventProvider } from "./components/events/EventProvider";
 import { useTrigger, useListener } from "./components/events/util";
-import { RootNotesInterface } from "./components/interface/RootNotesInterface";
-import {
-    useRootProject,
-    RootNotesContextType,
-} from "./components/interface/util";
+import { ManifestRecord } from "./types/record";
+import { SyncRecord } from "./types/sync";
+import { RootProvider } from "./components/root/RootProvider";
 
 export type * from "./types/project";
+export type * from "./types/notes";
+export type * from "./types/record";
+export type * from "./types/sync";
+
+export { ManifestRecord };
+export { SyncRecord };
 
 export { GenericIcon, IconPicker, IconFamilyNames, iconTypes };
 export type { IconFamilies, IconRepresentation };
 export { EventProvider, useListener, useTrigger };
-export { RootNotesInterface, useRootProject };
-export type { RootNotesContextType };
+export { RootProvider };
+export type { ProjectDescriptor } from "./components/root/util";
