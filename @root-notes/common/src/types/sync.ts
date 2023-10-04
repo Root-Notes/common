@@ -15,8 +15,8 @@ export interface SyncProvider<TSyncArgs = any> {
     processedEdits: string[];
     addListener: (listener: (edit: AtomicEdit) => void) => string;
     removeListener: (id: string) => void;
-    edit: (edit: AtomicEdit, record: Records) => Promise<void>;
-    get: (id: string) => Promise<Records>;
+    edit: (edit: AtomicEdit, record: Records | null) => Promise<void>;
+    get: (id: string) => Promise<Records | null>;
     getAll: () => Promise<Records[]>;
 }
 
