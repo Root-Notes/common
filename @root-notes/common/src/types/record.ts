@@ -1,6 +1,5 @@
 import { IconRepresentation } from "..";
 import { set } from "lodash";
-import { SyncInfo } from "./sync";
 
 export type AtomicEdit<TData = any, TSource = any> =
     | {
@@ -33,7 +32,6 @@ export type ManifestSettings = {
         name: string;
         icon: IconRepresentation;
     };
-    sync: SyncInfo[];
 };
 
 export class ManifestRecord implements Record {
@@ -55,5 +53,9 @@ export class ManifestRecord implements Record {
             this.lastRevision = edit;
             return this;
         }
+    }
+
+    public static create(settings: ManifestSettings): ManifestRecord {
+        return new ManifestRecord(null, settings);
     }
 }
