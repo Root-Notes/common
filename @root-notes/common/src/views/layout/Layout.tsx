@@ -11,12 +11,12 @@ import {
     MdSettings,
 } from "react-icons/md";
 import { Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { RootContext } from "../../components/root/util";
+import { useAppCommands } from "../../components/root/util";
 
 export function Layout() {
     const { t } = useTranslation();
-    const { close } = useContext(RootContext);
+    const { projectClose, projectCreate, projectOpen, appSettings } =
+        useAppCommands();
     return (
         <AppShell className="common-shell">
             <AppShellHeader className="shell-toolbar" h={48} p={6}>
@@ -29,7 +29,7 @@ export function Layout() {
                                 {
                                     name: t("common.components.menus.file.new"),
                                     icon: <MdCreateNewFolder size={20} />,
-                                    onActivate: console.log,
+                                    onActivate: () => projectCreate(),
                                     keyboard: ["Ctrl", "Shift", "N"],
                                 },
                                 {
@@ -37,7 +37,7 @@ export function Layout() {
                                         "common.components.menus.file.open"
                                     ),
                                     icon: <MdFolderOpen size={20} />,
-                                    onActivate: console.log,
+                                    onActivate: () => projectOpen(),
                                     keyboard: ["Ctrl", "O"],
                                 },
                                 {
@@ -45,14 +45,14 @@ export function Layout() {
                                         "common.components.menus.file.preferences"
                                     ),
                                     icon: <MdSettings size={20} />,
-                                    onActivate: console.log,
+                                    onActivate: () => appSettings(),
                                 },
                                 {
                                     name: t(
                                         "common.components.menus.file.close"
                                     ),
                                     icon: <MdClose size={20} />,
-                                    onActivate: () => close(),
+                                    onActivate: () => projectClose(),
                                 },
                             ]}
                         />
